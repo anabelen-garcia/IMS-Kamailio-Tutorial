@@ -64,7 +64,7 @@ A non-VM environment or non-Openstack VM with Ubuntu bionic should work equally 
 - SSH (to run commands).
 - sftp (to copy files to / from the host, e.g. with [filezilla](https://filezilla-project.org/)).
 
-Unless otherwise stated, all commands are run on the host by user root (no sudo).
+Unless otherwise stated, all commands are run on the host by user root (no sudo), with home directory `/root` .
 
 ### Initial configuration and packages to install
 

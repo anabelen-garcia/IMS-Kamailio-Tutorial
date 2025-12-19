@@ -2,7 +2,7 @@
 
 Ana Belén García Hernando. Universidad Politécnica de Madrid. 2025.
 
-If you find any errors or have any comments, please report them to <anabelen.garcia@upm.es>
+If you find any errors or have any comments, please report them to <anabelen.garcia _*at*_ upm.es>
 
 ## Main considerations
 
@@ -16,7 +16,7 @@ The following considerations have guided this work:
 
 ## License, credits to external sources and summary of original contributions
 
-The original parts of this tutorial have been generated in the framework of an [educational innovation project](https://innovacioneducativa.upm.es/) funded by [Universidad Politécnica de Madrid](https://www.upm.es/). An Attribution-NonCommercial-ShareAlike 4.0 International CC license ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en)) applies except for the external resources used in the case they have to preserve their respective licenses.
+The original parts of this tutorial have been generated in the framework of an [educational innovation project](https://innovacioneducativa.upm.es/) funded by [Universidad Politécnica de Madrid](https://www.upm.es/), titled "Aprendizaje inter-asignatura de sistemas telemáticos modernos: redes móviles y voz sobre IP". An Attribution-NonCommercial-ShareAlike 4.0 International CC license ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en)) applies except for the external resources used in the case they have to preserve their respective licenses.
 
 The following external resources have served as a guide to several parts of this tutorial:
 
@@ -26,7 +26,7 @@ The following external resources have served as a guide to several parts of this
 
 - Margarita Garrido Lorenzo. "[Implementación de una plataforma IMS con herramientas open source](https://hdl.handle.net/2117/96677)". Final degree project (Supervisor: José Luis Muñoz Tapia). Universitat Politècnica de Catalunya. 2016.
 
-  This work has served as inspiration and information regarding the use of PJSUA to be used as the IMS User Agent.
+  This work has served as inspiration and information regarding the use of PJSUA as the IMS User Agent.
 
 - Several free software products are used, amnog them: [Ubuntu](https://ubuntu.com/), [kamailio](https://www.kamailio.org/), [FHoSS](https://github.com/herlesupreeth/FHoSS), and [bind9](https://gitlab.isc.org/isc-projects/bind9).
 
@@ -72,7 +72,31 @@ Unless otherwise stated, all commands are run on the host by user root (no sudo)
 
 ### Initial configuration and packages to install
 
+Set hostname and timezone:
+
 ```bash
-root@kamailio-1:~# hostnamectl set-hostname kamailio-bionic
+root@hostname:~# hostnamectl set-hostname kamailio-bionic
 root@kamailio-bionic:~# timedatectl set-timezone Europe/Madrid # use your own timezone
+```
+
+Adapt repositories, update, upgrade and install initial packages:
+
+```bash
+root@kamailio-bionic:~# # Modify the repositories file as needed in your case, e.g.:
+
+root@kamailio-bionic:~# cat /etc/apt/sources.list
+deb https://nova.clouds.archive.ubuntu.com/ubuntu/ bionic main restricted
+deb https://nova.clouds.archive.ubuntu.com/ubuntu/ bionic-updates main restricted
+deb https://nova.clouds.archive.ubuntu.com/ubuntu/ bionic universe
+deb https://nova.clouds.archive.ubuntu.com/ubuntu/ bionic-updates universe
+deb https://nova.clouds.archive.ubuntu.com/ubuntu/ bionic multiverse
+deb https://nova.clouds.archive.ubuntu.com/ubuntu/ bionic-updates multiverse
+deb https://nova.clouds.archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb https://security.ubuntu.com/ubuntu bionic-security main restricted
+deb https://security.ubuntu.com/ubuntu bionic-security universe
+deb https://security.ubuntu.com/ubuntu bionic-security multiverse
+
+root@kamailio-bionic:~# # Install packages [SuckanLee2025]:
+
+root@kamailio-1:~# apt update && apt upgrade -y && apt install -y mysql-server tcpdump screen ntp ntpdate git-core dkms gcc flex bison libmysqlclient-dev make libssl-dev libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion g++ autoconf rtpproxy libmnl-dev libsctp-dev ipsec-tools libradcli-dev libradcli4
 ```

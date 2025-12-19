@@ -26,15 +26,12 @@ The following external resources have served as a guide to several parts of this
 
 ## Preparation of the (virtual) machine that hosts the scenario
 
-A VM with Ubuntu bionic has served as the base host on which to deploy the scenario. Specifically, a [cloud image for Ubuntu bionic](https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img) has been downloaded and deployed in an Openstack cloud environment, using a flavor with 2 vCPUs, 4096 MB RAM and 10 GB disk space, together with this cloud-init yaml file that enables root access with pass "admin":
+A VM with Ubuntu bionic has served as the base host on which to deploy the scenario. Specifically, a [cloud image for Ubuntu bionic](https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img) [^1] has been downloaded and deployed in an Openstack cloud environment, using a flavor with 2 vCPUs, 4096 MB RAM and 10 GB disk space, together with this cloud-init yaml file that enables root access with pass "admin":
+
+[^1]: QCow2 UEFI/GPT Bootable disk image.
 
 
-[^1]
-
-[^1]: This is the footnote..
-
-
-```
+```yaml
 #cloud-config
 disable_root: 0
 ssh_pwauth: True

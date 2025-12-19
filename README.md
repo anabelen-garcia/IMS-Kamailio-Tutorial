@@ -2,6 +2,8 @@
 
 Ana Belén García Hernando. Universidad Politécnica de Madrid. 2025.
 
+If you find any errors or have any comments, please report them to <anabelen.garcia@upm.es>
+
 ## Main considerations
 
 This is a step-by-step tutorial to setup an IMS scenario with Kamailio CSCFs and FHoSS as HSS, which runs in a single host. 
@@ -37,6 +39,8 @@ The following are the main contributions of this tutorial with respect to the us
   - No EPC (Evolved Packet Core) included, since this is a pure IMS scenario, no VoLTE involved. As a consequence, no Rx interface in place.
   - User Agents are based on PJSUA. No real smartphones.
   - Some other small changes that are documented where applicable.
+
+We have made our best to appropriately cite and respect the authorship and licenses of external sources used. If you feel something has not been properly cited or used, please contact the author.
 
 ## Preparation of the (virtual) machine that hosts the scenario
 

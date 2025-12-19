@@ -763,7 +763,7 @@ Arrange for `/etc/resolv.conf` file to have these contents:
 # operation for /etc/resolv.conf.
 
 nameserver 127.0.0.66
-nameserver 138.100.4.4
+nameserver <IP_address_of_another_nameserver_if_any>
 search domain.imsprovider.org openstacklocal
 ```
 

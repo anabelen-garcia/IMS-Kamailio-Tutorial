@@ -102,6 +102,14 @@ root@kamailio-bionic:~# # Install packages [SuckanLee2025]:
 root@kamailio-bionic:~# apt update && apt upgrade -y && apt install -y mysql-server tcpdump screen ntp ntpdate git-core dkms gcc flex bison libmysqlclient-dev make libssl-dev libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion g++ autoconf rtpproxy libmnl-dev libsctp-dev ipsec-tools libradcli-dev libradcli4
 ```
 
+Include these directories in `PATH` variable, so that further steps work:
+
+
+```bash
+root@kamailio-bionic:~# echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+```
+
 ## Download, compile and install kamailio
 
 Source information for this section: [SuckanLee2025].
@@ -165,22 +173,37 @@ DBENGINE=MYSQL
 ```
 
 
-| | | |
-|-|-|-|
-|  | _Complete information on the parameters: [Core Cookbook for Kamailio SIP Server v5.3.x (stable)](https://www.kamailio.org/wikidocs/cookbooks/5.3.x/core/)._ | |
-|
+
+## Create PCSCF, SCSCF and ICSCF databases
+
+
+> Note: the files to use when creating these databases are specified in the corresponding `README.md` files inside `etc/kamailio_scsf`, `/etc/kamailio_pcscf` and `/etc/kamailio_icscf`._
 
 
 
-Complete information on the parameters: [Core Cookbook for Kamailio SIP Server v5.3.x (stable)](https://www.kamailio.org/wikidocs/cookbooks/5.3.x/core/).
 
 
 
 
-| | | |
-|-|-|-|
-|  | _Comment_ | |
-|
+
+## Build and install PJSUA user agent
+
+```bash
+apt-get update
+apt install python3-dev gcc make binutils build-essential
+wget https://github.com/pjsip/pjproject/archive/refs/tags/2.14.tar.gz
+tar xvf 2.14.tar.gz
+cd pjproject-2.14/
+export CFLAGS="$CFLAGS -fPIC"
+./configure && make dep && make
+cp pjsip-apps/bin/pjsua* /usr/local/bin/pjsua
+```
+
+
+> Note: _Complete information on the parameters in [Core Cookbook for Kamailio SIP Server v5.3.x (stable)](https://www.kamailio.org/wikidocs/cookbooks/5.3.x/core/)_.
+
+
+
 
 
 ```bash

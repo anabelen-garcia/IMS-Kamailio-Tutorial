@@ -1,0 +1,51 @@
+4c4,5
+< listen=udp:10.4.128.21:5060
+---
+> listen=udp:127.0.0.33:5060
+> #listen=udp:10.4.128.21:5060
+8c9,10
+< listen=tcp:10.4.128.21:5060
+---
+> listen=tcp:127.0.0.33:5060
+> #listen=tcp:10.4.128.21:5060
+15c17
+< #!define IPSEC_LISTEN_ADDR "10.4.128.21"
+---
+> #!define IPSEC_LISTEN_ADDR "127.0.0.33"
+21c23
+< #!define RX_AF_SIGNALING_IP "10.4.128.21"
+---
+> #!define RX_AF_SIGNALING_IP "127.0.0.33"
+25c27,28
+< alias=pcscf.ims.mnc001.mcc001.3gppnetwork.org
+---
+> alias=pcscf1.domain.imsprovider.org
+> #alias=pcscf.ims.mnc001.mcc001.3gppnetwork.org
+30c33
+< #!define PCSCF_URL "sip:pcscf.ims.mnc001.mcc001.3gppnetwork.org:5060"
+---
+> #!define PCSCF_URL "sip:pcscf1.domain.imsprovider.org:5060"
+34,36c37,39
+< #!subst "/NETWORKNAME/ims.mnc001.mcc001.3gppnetwork.org/"
+< #!subst "/HOSTNAME/pcscf.ims.mnc001.mcc001.3gppnetwork.org/"
+< #!subst "/PCRF_REALM/epc.mnc001.mcc001.3gppnetwork.org/"
+---
+> #!subst "/NETWORKNAME/domain.imsprovider.org/"
+> #!subst "/HOSTNAME/pcscf1.domain.imsprovider.org/"
+> #!subst "/PCRF_REALM/epc.domain.imsprovider.org/"
+47c50
+< #!define DB_URL "mysql://pcscf:heslo@127.0.0.1/pcscf"
+---
+> #!define DB_URL "mysql://pcscf1:heslo@127.0.0.1/pcscf1"
+50c53
+< #!define SQLOPS_DBURL "pcscf=>mysql://pcscf:heslo@127.0.0.1/pcscf"
+---
+> #!define SQLOPS_DBURL "pcscf=>mysql://pcscf1:heslo@127.0.0.1/pcscf1"
+113,115c116,118
+< #!define WITH_RX
+< #!define WITH_RX_REG
+< #!define WITH_RX_CALL
+---
+> ##!define WITH_RX
+> ##!define WITH_RX_REG
+> ##!define WITH_RX_CALL

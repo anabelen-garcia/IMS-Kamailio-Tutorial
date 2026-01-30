@@ -1,7 +1,8 @@
 #!/bin/bash
-set -x
 
-source ./common.sh
+THISDIR="$(readlink -f "$(dirname -- ${BASH_SOURCE[0]})")" # Directory where this script is located; it is assumed all scripts are in the same directory
+
+source "$THISDIR"/common_cscfs.sh
 
 for ((i=0; i<len_pidfiles; i++)); do
 

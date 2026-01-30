@@ -1,0 +1,28 @@
+35c35
+< include_file "scscf.cfg"
+---
+> include_file "scscf1.cfg"
+48c48
+< listen=tcp:127.0.0.1:6060
+---
+> listen=tcp:127.0.0.11:6060
+101c101
+< system.service = "Serving-CSCF" desc "Function of this server"
+---
+> system.service = "Serving-CSCF1" desc "Function of this server1"
+195c195
+< modparam("jsonrpcs", "fifo_name", "/var/run/kamailio_scscf/kamailio_rpc.fifo")
+---
+> modparam("jsonrpcs", "fifo_name", "/var/run/kamailio_scscf1/kamailio_rpc.fifo")
+197c197
+< modparam("jsonrpcs", "dgram_socket", "/var/run/kamailio_scscf/kamailio_rpc.sock")
+---
+> modparam("jsonrpcs", "dgram_socket", "/var/run/kamailio_scscf1/kamailio_rpc.sock")
+200c200
+< modparam("ctl", "binrpc", "unix:/var/run/kamailio_scscf/kamailio_ctl")
+---
+> modparam("ctl", "binrpc", "unix:/var/run/kamailio_scscf1/kamailio_ctl")
+242c242
+< modparam("cdp","config_file","/etc/kamailio_scscf/scscf.xml")
+---
+> modparam("cdp","config_file","/etc/kamailio_scscf/scscf1.xml")

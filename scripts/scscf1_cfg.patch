@@ -1,0 +1,43 @@
+2c2,3
+< listen=udp:10.4.128.21:6060
+---
+> listen=udp:127.0.0.11:6060
+> #listen=udp:10.4.128.21:6060
+5c6,7
+< listen=tcp:10.4.128.21:6060
+---
+> listen=tcp:127.0.0.11:6060
+> #listen=tcp:10.4.128.21:6060
+10,14c12,16
+< #!define NETWORKNAME "ims.mnc001.mcc001.3gppnetwork.org"
+< #!define NETWORKNAME_ESC "ims\.mnc001\.mcc001\.3gppnetwork\.org"
+< #!define HOSTNAME "scscf.ims.mnc001.mcc001.3gppnetwork.org"
+< #!define HOSTNAME_ESC "scscf\.ims\.mnc001\.mcc001\.3gppnetwork\.org"
+< #!define URI "sip:scscf.ims.mnc001.mcc001.3gppnetwork.org:6060"
+---
+> #!define NETWORKNAME "domain.imsprovider.org"
+> #!define NETWORKNAME_ESC "domain\.imsprovider\.org"
+> #!define HOSTNAME "scscf1.domain.imsprovider.org"
+> #!define HOSTNAME_ESC "scscf1\.domain\.imsprovider\.org"
+> #!define URI "sip:scscf1.domain.imsprovider.org:6060"
+16,17c18,19
+< #!subst "/NETWORKNAME/ims.mnc001.mcc001.3gppnetwork.org/"
+< #!subst "/HSS_REALM/ims.mnc001.mcc001.3gppnetwork.org/"
+---
+> #!subst "/NETWORKNAME/domain.imsprovider.org/"
+> #!subst "/HSS_REALM/domain.imsprovider.org/"
+19c21,22
+< alias=scscf.ims.mnc001.mcc001.3gppnetwork.org
+---
+> alias=scsf1.domain.imsprovider.org
+> #alias=scscf.ims.mnc001.mcc001.3gppnetwork.org
+22c25,26
+< #!define ENUM_SUFFIX "ims.mnc001.mcc001.3gppnetwork.org."
+---
+> #!define ENUM_SUFFIX "domain.imsprovider.org."
+> ##!define ENUM_SUFFIX "ims.mnc001.mcc001.3gppnetwork.org."
+29c33,34
+< #!define DB_URL "mysql://scscf:heslo@127.0.0.1/scscf"
+---
+> #!define DB_URL "mysql://scscf1:heslo@127.0.0.1/scscf1"
+> ##!define DB_URL "mysql://scscf:heslo@127.0.0.1/scscf"

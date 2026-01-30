@@ -1,0 +1,40 @@
+12c12
+< import_file "pcscf.cfg"
+---
+> import_file "pcscf1.cfg"
+48c48
+< listen=tcp:127.0.0.1:5060
+---
+> listen=tcp:127.0.0.33:5060
+136c136
+< udp_mtu = 1300
+---
+> udp_mtu = 0
+143c143
+< system.service = "Proxy-CSCF" desc "Function of this server"
+---
+> system.service = "Proxy-CSCF1" desc "Function of this server1"
+264c264
+< modparam("jsonrpcs", "fifo_name", "/var/run/kamailio_pcscf/kamailio_rpc.fifo")
+---
+> modparam("jsonrpcs", "fifo_name", "/var/run/kamailio_pcscf1/kamailio_rpc.fifo")
+266c266
+< modparam("jsonrpcs", "dgram_socket", "/var/run/kamailio_pcscf/kamailio_rpc.sock")
+---
+> modparam("jsonrpcs", "dgram_socket", "/var/run/kamailio_pcscf1/kamailio_rpc.sock")
+311c311
+< modparam("rtimer", "timer", "name=NATPING;interval=5;mode=1;")
+---
+> modparam("rtimer", "timer", "name=NATPING;interval=300;mode=1;")
+349c349
+< modparam("rtpengine", "rtpengine_sock", "1 == udp:localhost:2223")
+---
+> modparam("rtpengine", "rtpengine_sock", "1 == udp:127.0.0.88:2223")
+357c357
+< modparam("ctl", "binrpc", "unix:/var/run/kamailio_pcscf/kamailio_ctl")
+---
+> modparam("ctl", "binrpc", "unix:/var/run/kamailio_pcscf1/kamailio_ctl")
+421c421
+< modparam("cdp","config_file","/etc/kamailio_pcscf/pcscf.xml")
+---
+> modparam("cdp","config_file","/etc/kamailio_pcscf/pcscf1.xml")

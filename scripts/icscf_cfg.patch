@@ -1,0 +1,28 @@
+2c2
+< listen=udp:10.4.128.21:4060
+---
+> listen=udp:127.0.0.55:4060
+5c5
+< listen=tcp:10.4.128.21:4060
+---
+> listen=tcp:127.0.0.55:4060
+10c10
+< alias=ims.mnc001.mcc001.3gppnetwork.org
+---
+> alias=domain.imsprovider.org
+12,13c12,13
+< #!define NETWORKNAME "ims.mnc001.mcc001.3gppnetwork.org"
+< #!define HOSTNAME "icscf.ims.mnc001.mcc001.3gppnetwork.org"
+---
+> #!define NETWORKNAME "domain.imsprovider.org"
+> #!define HOSTNAME "icscf.domain.imsprovider.org"
+15,16c15,16
+< #!subst "/NETWORKNAME/ims.mnc001.mcc001.3gppnetwork.org/"
+< #!subst "/HSS_REALM/ims.mnc001.mcc001.3gppnetwork.org/"
+---
+> #!subst "/NETWORKNAME/domain.imsprovider.org/"
+> #!subst "/HSS_REALM/domain.imsprovider.org/"
+18c18
+< #!define ENUM_SUFFIX "ims.mnc001.mcc001.3gppnetwork.org."
+---
+> #!define ENUM_SUFFIX "domain.imsprovider.org."

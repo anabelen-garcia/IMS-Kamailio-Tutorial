@@ -1,0 +1,18 @@
+3,4c3,4
+< 	FQDN="scscf.ims.mnc001.mcc001.3gppnetwork.org"
+< 	Realm="ims.mnc001.mcc001.3gppnetwork.org"
+---
+> 	FQDN="scscf1.domain.imsprovider.org"
+> 	Realm="domain.imsprovider.org"
+17c17
+< 	<Peer FQDN="hss.ims.mnc001.mcc001.3gppnetwork.org" Realm="ims.mnc001.mcc001.3gppnetwork.org" port="3868"/>
+---
+> 	<Peer FQDN="hss.domain.imsprovider.org" Realm="domain.imsprovider.org" port="3868"/>
+19c19
+< 	<Acceptor port="3870" bind="10.4.128.21"/>
+---
+> 	<Acceptor port="3870" bind="127.0.0.11"/>
+35c35
+< 	<DefaultRoute FQDN="hss.ims.mnc001.mcc001.3gppnetwork.org" metric="10"/>
+---
+> 	<DefaultRoute FQDN="hss.domain.imsprovider.org" metric="10"/>

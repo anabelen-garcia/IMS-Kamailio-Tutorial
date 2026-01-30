@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 pidfiles=("/var/run/kamailio_pcscf1/kamailio_pcscf1.pid" "/var/run/kamailio_scscf1/kamailio_scscf1.pid" "/var/run/kamailio_icscf/kamailio_icscf.pid")
 configfiles=("/etc/kamailio_pcscf/kamailio_pcscf1.cfg" "/etc/kamailio_scscf/kamailio_scscf1.cfg" "/etc/kamailio_icscf/kamailio_icscf.cfg")

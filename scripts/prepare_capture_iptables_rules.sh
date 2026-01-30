@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 ruleinit=(iptables -w -t mangle)
 rule1=(OUTPUT -m iprange --src-range 127.0.0.2-127.255.255.255 -m iprange --dst-range 127.0.0.2-127.255.255.255 -j MARK --set-mark 0x11)

@@ -2,26 +2,23 @@
 
 Ana Belén García Hernando. Universidad Politécnica de Madrid. 
 
-Last updated 30 Jan. 2026.
+Last updated 30 Jan. 2026 (technical contents).
 (First version 19 Dec. 2025).
 
 If you find any errors or have any comments, please report them to <anabelen.garcia _*at*_ upm.es>
 
-## Introduction
+## Credits and license
 
-### Main considerations
+<table>
+   <tr>
+    <td><a href="https://www.upm.es/"><img src="figures/Logo-UPM.png" alt="Universidad Politécnica de Madrid"></a></td>
+    <td>The original parts of this tutorial have been generated in the framework of an educational innovation project funded by <a href="https://www.upm.es/">Universidad Politécnica de Madrid</a> (UPM), titled "<a href="https://innovacioneducativa.upm.es/proyectosIE/informacion?anyo=2024-2025&id=1617">Aprendizaje inter-asignatura de sistemas telemáticos modernos: redes móviles y voz sobre IP</a>" (code IE25.5901), during academic course 2024/2025.</td>
 
-This is a step-by-step tutorial to setup an IMS scenario with Kamailio (as CSCFs) and FHoSS (as HSS), which runs in a single host. 
+</table>
 
-The following considerations have guided this work:
-- The main purpose of this scenario is **academic** (mainly for teaching). Thus, ease of flow graph visualization with Wireshark has been given priority over, e.g., more realistic deployment options.
-- For this same reason, on several occasions the version of several of the tools and products used is not the latest, but one for which enough detailed information existed publicly about similar test scenarios. Most probably an equivalent scenario can be reached with newer versions.
-- The fact that all elements run in the same (virtual) machine makes it easier to have a portable (and "clonable") solution and also to get a capture file with consistent and causally-ordered traces, useful for teaching, learning and experimenting.
-- In this tutorial, the rationale behind some of the main decisions is explained so that the scenario can more easily evolve to more complex deployments.
+This project has been co-coordinated by professors Ana Belén García Hernando and Pedro Castillejo Parrilla. The following professors have also participated in it: Sury Bravo Lasprilla, Hugo Alexer Parada Gélvez and Iván Pau de la Cruz. All of them are with the "Departamento de Ingeniería Telemática y Electrónica" of "[Escuela Técnica Superior de Ingeniería y Sistemas de Telecomunicación](https://www.etsist.upm.es/)" of UPM.
 
-### License and credits to external sources
-
-The original parts of this tutorial have been generated in the framework of an [educational innovation project](https://innovacioneducativa.upm.es/) funded by [Universidad Politécnica de Madrid](https://www.upm.es/), titled "Aprendizaje inter-asignatura de sistemas telemáticos modernos: redes móviles y voz sobre IP". An Attribution-NonCommercial-ShareAlike 4.0 International CC license ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en)) applies except for the external resources used in the case they have to preserve their respective licenses.
+An Attribution-NonCommercial-ShareAlike 4.0 International CC license ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)) applies, except for the external resources used in the case they have to preserve their respective licenses.
 
 The following external resources have served as a guide to several parts of this tutorial:
 
@@ -35,6 +32,21 @@ The following external resources have served as a guide to several parts of this
 
 - Several free software products are used throughout the tutorial, amnog them: [Ubuntu](https://ubuntu.com/), [kamailio](https://www.kamailio.org/) (specifically this [branch](https://github.com/herlesupreeth/kamailio) by [Supreeth Herle](https://github.com/herlesupreeth)), [FHoSS](https://github.com/herlesupreeth/FHoSS), [bind9](https://gitlab.isc.org/isc-projects/bind9), and PJSUA (a command-line SIP user agent that allows to access [PJSIP library](https://docs.pjsip.org/en/latest/index.html) functions very flexibly). In addition, [Wireshark](https://www.wireshark.org/) is used to open and analyze traffic captures (version 4.6; if a different version is used, menus and procedures may vary slightly).
 
+We have done our best to appropriately cite and respect the authorship and licenses of the external sources used. If you feel something has not been properly cited or used, please contact the author at the beginning of this README.
+
+## Introduction
+
+### Main considerations
+
+This is a step-by-step tutorial to setup an IMS scenario with Kamailio (as CSCFs) and FHoSS (as HSS), which runs in a single host. 
+
+The following considerations have guided this work:
+- The main purpose of this scenario is **academic** (mainly for teaching and experimenting). Thus, ease of flow graph visualization with Wireshark has been given priority over, e.g., more realistic deployment options.
+- For this same reason, on occasions the version of several of the tools and products used is not the latest, but one for which enough detailed information existed publicly about similar test scenarios. Most probably an equivalent scenario can be reached with newer versions.
+- The fact that all elements run in the same (virtual) machine makes it easier to have a portable (and "clonable") solution and also to get a capture file with consistent and causally-ordered traces, useful for teaching, learning and experimenting.
+- In this tutorial, the rationale behind some of the main decisions is explained so that the scenario can more easily evolve to more complex deployments.
+- The scenario may serve as a base for the design of different laboratory exercises, related to IMS (e.g. deploying more than one IMS domain), general networking (e.g. locating one or several elements behind a NAT, including several DNS servers, ...), security (e.g. experimenting with different authentication schemes available for IMS sessions), mobile communications (e.g. integrating this scenario with a 4G or 5G emulated scenario so that one UA accesses IMS through a mobile network), or VoIP (e.g. playing with different codecs, analyzing the effects on received speech quality of network-induced delays and losses), among others.
+
 ### Summary of original contributions
 
 The following are the main contributions of this tutorial with respect to the used external resources and other similar available tutorials:
@@ -46,8 +58,6 @@ The following are the main contributions of this tutorial with respect to the us
   - No EPC (Evolved Packet Core) included, since this is a pure IMS scenario, with no VoLTE involved. As a consequence, no Rx interface is in place.
   - User Agents are based on PJSUA. No real smartphones.
   - Some other small changes that are documented where applicable.
-
-We have made our best to appropriately cite and respect the authorship and licenses of the external sources used. If you feel something has not been properly cited or used, please contact the author at the beginning of this README.
 
 ### Accompanying resources
 

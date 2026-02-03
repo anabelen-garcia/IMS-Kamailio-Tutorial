@@ -2,10 +2,62 @@
 
 Ana Belén García Hernando. Universidad Politécnica de Madrid. 
 
-Last updated 30 Jan. 2026 (technical contents).
+Last update of technical contents: 30 Jan. 2026.
 (First version 19 Dec. 2025).
 
 If you find any errors or have any comments, please report them to <anabelen.garcia _*at*_ upm.es>
+
+> Note: if you are reading this tutorial from a source different from [https://github.com/anabelen-garcia/IMS-Kamailio-Tutorial](https://github.com/anabelen-garcia/IMS-Kamailio-Tutorial), we encourage you to check that online GitHub version because it may have been updated and/or upgraded. 
+
+## Table of contents
+
+- [Single-VM IMS setup with Kamailio and FHoSS for academic purposes](#single-vm-ims-setup-with-kamailio-and-fhoss-for-academic-purposes)
+  - [Table of contents](#table-of-contents)
+  - [Credits and license](#credits-and-license)
+  - [Introduction](#introduction)
+    - [Main considerations](#main-considerations)
+    - [Summary of original contributions](#summary-of-original-contributions)
+    - [Accompanying resources](#accompanying-resources)
+  - [Description of the scenario](#description-of-the-scenario)
+  - [Preparation of the (virtual) machine that hosts the scenario](#preparation-of-the-virtual-machine-that-hosts-the-scenario)
+    - [Initial configuration and packages to install](#initial-configuration-and-packages-to-install)
+    - [Create and persist the loopback addresses needed for the different functions](#create-and-persist-the-loopback-addresses-needed-for-the-different-functions)
+    - [Download the resources accompanying this tutorial (suggested)](#download-the-resources-accompanying-this-tutorial-suggested)
+  - [Download, compile and install kamailio](#download-compile-and-install-kamailio)
+  - [Download and adapt configuration files for PCSCF, SCSCF and ICSCF](#download-and-adapt-configuration-files-for-pcscf-scscf-and-icscf)
+    - [Modification of SCSCF1 files](#modification-of-scscf1-files)
+      - [kamailio\_scscf1.cfg](#kamailio_scscf1cfg)
+      - [scscf1.xml](#scscf1xml)
+      - [scscf1.cfg](#scscf1cfg)
+    - [Modification of PCSCF1 files](#modification-of-pcscf1-files)
+      - [kamailio\_pcscf1.cfg](#kamailio_pcscf1cfg)
+      - [pcscf1.xml](#pcscf1xml)
+      - [pcscf1.cfg](#pcscf1cfg)
+    - [Modification of ICSCF files](#modification-of-icscf-files)
+      - [kamailio\_icscf.cfg](#kamailio_icscfcfg)
+      - [icscf.xml](#icscfxml)
+      - [icscf.cfg](#icscfcfg)
+  - [Create PCSCF, SCSCF and ICSCF databases](#create-pcscf-scscf-and-icscf-databases)
+  - [Install and configure DNS server](#install-and-configure-dns-server)
+  - [Install and configure RTPEngine](#install-and-configure-rtpengine)
+  - [Launch the CSCF processes (and prepare the system for the traffic capture)](#launch-the-cscf-processes-and-prepare-the-system-for-the-traffic-capture)
+    - [Create the cgroups and classids on which the CSCFs are going to be later launched](#create-the-cgroups-and-classids-on-which-the-cscfs-are-going-to-be-later-launched)
+    - [Make sure all traffic coming from each of the processes launched in these groups has its source IP address as elected for the scenario](#make-sure-all-traffic-coming-from-each-of-the-processes-launched-in-these-groups-has-its-source-ip-address-as-elected-for-the-scenario)
+    - [Launch the CSCF processes each inside its cgroup](#launch-the-cscf-processes-each-inside-its-cgroup)
+    - [Add iptables rules to be able to perform a capture of the packets with correct IP addresses and no duplicates](#add-iptables-rules-to-be-able-to-perform-a-capture-of-the-packets-with-correct-ip-addresses-and-no-duplicates)
+    - [How to capture in the virtual interface related to the chosen nflog-group](#how-to-capture-in-the-virtual-interface-related-to-the-chosen-nflog-group)
+  - [Download and install HSS](#download-and-install-hss)
+    - [Prerequisites: download Java 7 and ant](#prerequisites-download-java-7-and-ant)
+    - [Download and install FHoSS](#download-and-install-fhoss)
+  - [Add users using the FHoSS web interface](#add-users-using-the-fhoss-web-interface)
+  - [Build and install PJSUA user agent](#build-and-install-pjsua-user-agent)
+  - [Download an audio file to be played in calls](#download-an-audio-file-to-be-played-in-calls)
+  - [Launch a user agent so that it registers to IMS](#launch-a-user-agent-so-that-it-registers-to-ims)
+    - [Registration signaling: flow graph](#registration-signaling-flow-graph)
+  - [Launch two user agents and establish a call](#launch-two-user-agents-and-establish-a-call)
+    - [Call establishment signaling: flow graph](#call-establishment-signaling-flow-graph)
+    - [RTP media: flow graph and audio playing with Wireshark](#rtp-media-flow-graph-and-audio-playing-with-wireshark)
+
 
 ## Credits and license
 
@@ -54,7 +106,7 @@ The following are the main contributions of this tutorial with respect to the us
 - All different functions run in the same hosting machine, but each one generates and consumes traffic using a different loopback IP address (127.0.0.X), avoiding 127.0.0.1 in most cases (except for mysql database) for easier traffic analyses.
 - Explicit and detailed configuration of iptables artefacts are included that allow to capture traffic to analyse the main functioning of the IMS system for academic and testing purposes.
 - This tutorial deviates from [SuckanLee2025] in several additional aspects, among them:
-  - Different IMS domain (**domain.imsprovider.org**) and some nodes' names to be able to upgrade the scenario in the future more easily.
+  - Different IMS domain (*domain.imsprovider.org*) and some nodes' names to be able to upgrade the scenario in the future more easily.
   - No EPC (Evolved Packet Core) included, since this is a pure IMS scenario, with no VoLTE involved. As a consequence, no Rx interface is in place.
   - User Agents are based on PJSUA. No real smartphones.
   - Some other small changes that are documented where applicable.
@@ -197,6 +249,8 @@ mv IMS-Kamailio-Tutorial/* /root/
 chmod +x /root/scripts/*.sh
 rm -r /root/IMS-Kamailio-Tutorial/
 ```
+
+> Note: if you are reading this tutorial from a source different from [https://github.com/anabelen-garcia/IMS-Kamailio-Tutorial](https://github.com/anabelen-garcia/IMS-Kamailio-Tutorial), download the accompanying scripts.zip file, create the directory `/root/scripts/` and extract the .zip file into it. 
 
 With this, you will have available a `/root/scripts/` directory with several scripts mentioned in the rest of this tutorial.
 
